@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Corrupcao" ng-controller="Core">
+<head>
+    <meta charset="UTF-8">
+    <title>{{game.money}}</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/game.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+</head>
+<body>
+    <div class="main">
+        <div class="stats">
+            <div class="stats_main">
+                <p class="money"><img class="icon_money" src="imgs/icon_money.png"/> {{game.money}}</p>
+                <p class="moneyps">Dinheiro desviado por segundo: {{game.getMoneyPs()}}</p>
+                <p class="moneyps">Total desviado: {{game.totalMoney}}</p>
+            </div>
+        </div>
+        <div class="perks noselect" ng-controller="Perks">
+            <div class="perk_change">
+                <div class="perk_change_box" ng-click="showItems()">Items</div>
+                <div class="perk_change_box" ng-click="showUpgrades()">Upg</div>
+            </div>
+
+            <div ng-repeat="item in items" ng-show="itemsVisible">
+                <div class="item" ng-controller="Item" ng-init="init($index)" ng-click="buy()"  ng-mouseover="showDetails(true)" ng-mouseleave="showDetails(false)">
+                    <div class="item_cantbuy" ng-hide="canbuy()"></div>
+                    <div class="tooltip_perk" ng-show="detailsVisible">
+                        <p class="item_name">{{data.description}}</p>
+                        <p class="item_price">{{data.price}}</p>
+                    </div>
+                    <img src="{{data.portrait}}" class="item_img"/>
+                    <div class="item_info">
+                        <p class="item_name">{{data.name}}</p>
+                        <p class="item_price">{{data.price}}</p>
+                    </div>
+                    <div class="item_quant">{{data.quantity}}</div>
+                </div>
+            </div>
+
+            <div ng-repeat="upgrade in upgrades" ng-show="upgradesVisible">
+                <div class="upgrade" ng-controller="Upgrade" ng-init="init($index)" ng-click="buy()" ng-hide="data.bought">
+                    <img class="upgrade_img" src="{{data.portrait}}" ng-mouseover="showDetails(true)" ng-mouseleave="showDetails(false)"/>
+                    <div class="tooltip_perk" ng-show="detailsVisible">
+                        <p>{{data.name}}</p>
+                        <p>{{data.description}}</p>
+                        <p>{{data.descriptionEffects}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clicks">
+            <img ng-click="click()" class="img_click" src="imgs/money.png"/>
+        </div>
+    </div>
+</body>
+</html>
