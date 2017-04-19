@@ -1,2 +1,2 @@
 # AngularClickerGame
-A simple clicker game engine written with AngularJS
+A simple clicker game written with AngularJS
